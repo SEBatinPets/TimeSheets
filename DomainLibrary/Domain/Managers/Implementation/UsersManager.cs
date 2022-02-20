@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace DomainLibrary.Domain.Managers.Implementation
 {
-    public class UserManager : IUserManager
+    public class UsersManager : IUsersManager
     {
-        private readonly IUserRepository userRepository;
-        public UserManager(IUserRepository userRepository) 
+        private readonly IUsersRepository userRepository;
+        public UsersManager(IUsersRepository userRepository) 
         {
             this.userRepository = userRepository;
         }

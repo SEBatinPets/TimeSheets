@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DomainLibrary.Domain.Managers.Interfaces
 {
-    public interface IEmployeeManager: IManager<EmployeeDto>
+    public interface IUsersManager: IManager<UserDto>
     {
     }
 }

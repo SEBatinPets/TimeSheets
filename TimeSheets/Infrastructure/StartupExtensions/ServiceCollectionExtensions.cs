@@ -25,13 +25,13 @@ namespace TimeSheets.Infrastructure.StartupExtensions
         }
         public static void ConfigureManagers(this IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeManager, EmployeeManager>();
-            services.AddSingleton<IUserManager, UserManager>();
+            services.AddScoped<IEmployeesManager, EmployeesManager>();
+            services.AddScoped<IUsersManager, UsersManager>();
         }
         public static void ConfigureRepositories(this IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddScoped<IEmployeesRepository, EmployeesRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
         public static void ConfigureDb(this IServiceCollection services, IConfiguration configuration)
         {

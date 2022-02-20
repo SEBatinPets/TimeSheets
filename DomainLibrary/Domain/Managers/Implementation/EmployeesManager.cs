@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace DomainLibrary.Domain.Managers.Implementation
 {
-    public class EmployeeManager : IEmployeeManager
+    public class EmployeesManager : IEmployeesManager
     {
-        private readonly IEmployeeRepository employeeRepository;
-        public EmployeeManager(IEmployeeRepository employeeRepository)
+        private readonly IEmployeesRepository employeeRepository;
+        public EmployeesManager(IEmployeesRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }

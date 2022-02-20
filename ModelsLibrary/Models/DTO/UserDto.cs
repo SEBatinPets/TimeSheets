@@ -19,6 +19,10 @@ namespace ModelsLibrary.Models.DTO
 
         public static implicit operator User(UserDto userDto)
         {
+            if(userDto == null)
+            {
+                return null;
+            }
             return new User()
             {
                 Id = userDto.Id,
@@ -32,6 +36,10 @@ namespace ModelsLibrary.Models.DTO
         }
         public static implicit operator UserDto(User user)
         {
+            if (user == null)
+            {
+                return null;
+            }
             return new UserDto()
             {
                 Id=user.Id,

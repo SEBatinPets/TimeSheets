@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace RepositoriesLibrary.Repositories.Implementation
 {
-    public class UserRepository : IUserRepository
+    public class UsersRepository : IUsersRepository
     {
         private readonly TimeSheetsDbContext context;
-        public UserRepository(TimeSheetsDbContext context)
+        public UsersRepository(TimeSheetsDbContext context)
         {
             this.context = context;
         }

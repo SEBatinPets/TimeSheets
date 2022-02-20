@@ -15,6 +15,10 @@ namespace ModelsLibrary.Models.DTO
 
         public static implicit operator Employee(EmployeeDto employeeDto)
         {
+            if(employeeDto == null)
+            {
+                return null;
+            }
             return new Employee()
             {
                 Id = employeeDto.Id,
@@ -24,6 +28,10 @@ namespace ModelsLibrary.Models.DTO
         }
         public static implicit operator EmployeeDto(Employee employee)
         {
+            if (employee == null)
+            {
+                return null;
+            }
             return new EmployeeDto()
             {
                 Id =employee.Id,
