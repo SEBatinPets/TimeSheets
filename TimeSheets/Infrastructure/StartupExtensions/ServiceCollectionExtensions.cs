@@ -1,7 +1,10 @@
 ﻿using DomainLibrary.Domain.Managers.Implementation;
 using DomainLibrary.Domain.Managers.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using RepositoriesLibrary.Data.Ef.DbContexts;
 using RepositoriesLibrary.Repositories.Implementation;
 using RepositoriesLibrary.Repositories.Interfaces;
 
@@ -26,7 +29,12 @@ namespace TimeSheets.Infrastructure.StartupExtensions
         }
         public static void ConfigureRepositories(this IServiceCollection services)
         {
-            services.AddSingleton<IPersonRepository, PersonRepository>();
+            
+        }
+        public static void ConfigureDb(this IServiceCollection services, IConfiguration configuration)
+        {
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<TimeSheetsDbContext>(options => options.UseSqlite(connectionString));
         }
     }
 }
