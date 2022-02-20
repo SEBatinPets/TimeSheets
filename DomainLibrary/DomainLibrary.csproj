@@ -9,8 +9,4 @@
     <ProjectReference Include="..\RepositoriesLibrary\RepositoriesLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\Managers\Implementation\" />
-  </ItemGroup>
-
 </Project>

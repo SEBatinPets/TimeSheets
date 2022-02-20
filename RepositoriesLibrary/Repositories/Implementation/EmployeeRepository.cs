@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RepositoriesLibrary.Repositories.Implementation
 {
-    internal class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly TimeSheetsDbContext context;
         public EmployeeRepository(TimeSheetsDbContext context)

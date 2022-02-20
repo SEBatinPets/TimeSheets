@@ -30,6 +30,7 @@ namespace TimeSheets
             services.ConfigureSwagger();
             services.ConfigureManagers();
             services.ConfigureRepositories();
+            services.ConfigureDb(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

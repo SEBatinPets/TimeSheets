@@ -1,4 +1,5 @@
-﻿using DomainLibrary.Domain.Managers.Interfaces;
+﻿using DomainLibrary.Domain.Managers.Implementation;
+using DomainLibrary.Domain.Managers.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,11 +25,13 @@ namespace TimeSheets.Infrastructure.StartupExtensions
         }
         public static void ConfigureManagers(this IServiceCollection services)
         {
-
+            services.AddSingleton<IEmployeeManager, EmployeeManager>();
+            services.AddSingleton<IUserManager, UserManager>();
         }
         public static void ConfigureRepositories(this IServiceCollection services)
         {
-            
+            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
         }
         public static void ConfigureDb(this IServiceCollection services, IConfiguration configuration)
         {
