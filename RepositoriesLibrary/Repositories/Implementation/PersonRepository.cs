@@ -56,6 +56,14 @@ namespace RepositoriesLibrary.Repositories.Implementation
             {
                 for (int i = 1; i <= take; i++)
                 {
+                    if(
+                        skip >= data.Count || 
+                        take >= data.Count ||
+                        skip < 0 ||
+                        take < 0)
+                    {
+                        break;
+                    } 
                     persons.Add(data[skip + i]);
                 }
             }
