@@ -10,7 +10,7 @@ namespace DomainLibrary.Domain.Managers.Interfaces
 {
     public interface IPersonManager: IManager<PersonDto>
     {
-        Task<PersonDto> GetByNameAsync(string name, CancellationToken token);
+        Task<IEnumerable<PersonDto>> GetByNameAsync(string name, CancellationToken token);
         Task<IEnumerable<PersonDto>> GetByPaginationAsync(int skip, int take, CancellationToken token);        
     }
 }

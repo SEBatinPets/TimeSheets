@@ -32,9 +32,10 @@ namespace DomainLibrary.Domain.Managers.Implementation
             return await personRepository.GetByIdAsync(id,token);
         }
 
-        public async Task<PersonDto> GetByNameAsync(string name, CancellationToken token)
+        public async Task<IEnumerable<PersonDto>> GetByNameAsync(string name, CancellationToken token)
         {
-            return await personRepository.GetByNameAsync(name, token);
+            var result = await personRepository.GetByNameAsync(name, token);
+            return (IEnumerable<PersonDto>)result;
         }
 
         public async Task<IEnumerable<PersonDto>> GetByPaginationAsync(int skip, int take, CancellationToken token)
