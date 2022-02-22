@@ -19,7 +19,11 @@ namespace RepositoriesLibrary.Repositories.Implementation
 
         public async Task DeleteByIdAsync(int id, CancellationToken token)
         {
-            data.Remove(await GetByIdAsync(id, token));
+            var person = await GetByIdAsync(id, token);
+            if (person != null)
+            {
+                data.Remove(person);
+            }
         }
 
         public Task<Person> GetByIdAsync(int id, CancellationToken token)
