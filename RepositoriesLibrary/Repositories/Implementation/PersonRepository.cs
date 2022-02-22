@@ -60,7 +60,8 @@ namespace RepositoriesLibrary.Repositories.Implementation
                         skip >= data.Count || 
                         take >= data.Count ||
                         skip < 0 ||
-                        take < 0)
+                        take < 0 ||
+                        skip + i >= data.Count)
                     {
                         break;
                     } 
@@ -77,12 +78,20 @@ namespace RepositoriesLibrary.Repositories.Implementation
             return Task.FromResult(result);
         }
 
-        public async Task UpdateAsync(Person item, CancellationToken token)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /// <response code="0">Данные изменены</response>
+        /// <response code="1">Исходные данные не найдены</response>
+        public async Task<int> UpdateAsync(Person item, CancellationToken token)
         {
             var person = await GetByIdAsync(item.Id, token);
             if(person == null)
             {
-                return;
+                return 1;
             }
             person.FirstName = item.FirstName;
             person.LastName = item.LastName;
@@ -90,6 +99,7 @@ namespace RepositoriesLibrary.Repositories.Implementation
             person.Company = item.Company;
             person.Age = item.Age;
 
+            return 0;
         }
 
         private static List<Person> data = new List<Person>() {

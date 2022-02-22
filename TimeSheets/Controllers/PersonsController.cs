@@ -52,9 +52,15 @@ namespace TimeSheets.Controllers
         public async Task<IActionResult> Update([FromBody] PersonDto personDto)
         {
             var cts = new CancellationTokenSource();
-            await personManager.UpdateAsync(personDto, cts.Token);
+            var resultCode = await personManager.UpdateAsync(personDto, cts.Token);
 
-            return Ok();
+            if(resultCode == 0)
+            {
+                return Ok();
+            } else
+            {
+                return StatusCode(400);
+            }
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

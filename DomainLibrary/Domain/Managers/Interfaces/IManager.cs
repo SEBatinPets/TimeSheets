@@ -12,7 +12,7 @@ namespace DomainLibrary.Domain.Managers.Interfaces
     {
         Task CreateAsync(PersonDto item, CancellationToken token);
         Task<PersonDto> GetByIdAsync(int id, CancellationToken token);
-        Task UpdateAsync(PersonDto item, CancellationToken token);
+        Task<int> UpdateAsync(PersonDto item, CancellationToken token);
         Task DeleteByIdAsync(int id, CancellationToken token);
     }
 }

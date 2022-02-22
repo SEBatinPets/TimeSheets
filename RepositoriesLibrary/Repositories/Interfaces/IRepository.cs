@@ -11,7 +11,7 @@ namespace RepositoriesLibrary.Repositories.Interfaces
     {
         Task CreateAsync(T item, CancellationToken token);
         Task<T> GetByIdAsync(int id, CancellationToken token);
-        Task UpdateAsync(T item, CancellationToken token);
+        Task<int> UpdateAsync(T item, CancellationToken token);
         Task DeleteByIdAsync(int id, CancellationToken token);
     }
 }

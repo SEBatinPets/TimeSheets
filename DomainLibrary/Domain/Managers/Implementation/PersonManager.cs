@@ -48,9 +48,9 @@ namespace DomainLibrary.Domain.Managers.Implementation
             return result;
         }
 
-        public async Task UpdateAsync(PersonDto item, CancellationToken token)
+        public async Task<int> UpdateAsync(PersonDto item, CancellationToken token)
         {
-            await personRepository.UpdateAsync(item, token);
+            return await personRepository.UpdateAsync(item, token);
         }
     }
 }
