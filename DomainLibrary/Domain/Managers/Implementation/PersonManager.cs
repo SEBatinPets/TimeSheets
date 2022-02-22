@@ -1,5 +1,6 @@
 ﻿using DomainLibrary.Domain.Managers.Interfaces;
 using ModelsLibrary.Models.DTO;
+using ModelsLibrary.Models.Entities;
 using RepositoriesLibrary.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,13 @@ namespace DomainLibrary.Domain.Managers.Implementation
 
         public async Task<IEnumerable<PersonDto>> GetByNameAsync(string name, CancellationToken token)
         {
-            var result = await personRepository.GetByNameAsync(name, token);
-            return (IEnumerable<PersonDto>)result;
+            IEnumerable<Person> persons = await personRepository.GetByNameAsync(name, token);
+            List<PersonDto> result = new List<PersonDto>();
+            foreach(var person in persons)
+            {
+                result.Add(person);
+            }
+            return result;
         }
 
         public async Task<IEnumerable<PersonDto>> GetByPaginationAsync(int skip, int take, CancellationToken token)

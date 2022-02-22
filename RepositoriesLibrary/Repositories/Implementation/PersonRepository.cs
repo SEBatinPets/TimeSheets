@@ -33,7 +33,10 @@ namespace RepositoriesLibrary.Repositories.Implementation
 
         public Task<IEnumerable<Person>> GetByNameAsync(string name, CancellationToken token)
         {
-            return Task.FromResult(data.Where(p => Contain($"{p.FirstName} {p.LastName}", name)));
+            return Task.FromResult(data.Where
+                (p => Contain(
+                    $"{p.FirstName} {p.LastName}".ToLower(), 
+                    name.ToLower())));
 
             static bool Contain(string baseString, string valueString)
             {
