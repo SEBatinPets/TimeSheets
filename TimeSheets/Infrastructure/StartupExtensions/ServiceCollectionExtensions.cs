@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DomainLibrary.Domain.Managers.Implementation;
+using DomainLibrary.Domain.Managers.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using RepositoriesLibrary.Repositories.Implementation;
+using RepositoriesLibrary.Repositories.Interfaces;
 
 namespace TimeSheets.Infrastructure.StartupExtensions
 {
@@ -15,6 +19,14 @@ namespace TimeSheets.Infrastructure.StartupExtensions
                     Version = "v1"
                 });
             });
+        }
+        public static void ConfigureManagers(this IServiceCollection services)
+        {
+            services.AddSingleton<IPersonManager, PersonManager>();
+        }
+        public static void ConfigureRepositories(this IServiceCollection services)
+        {
+            services.AddSingleton<IPersonRepository, PersonRepository>();
         }
     }
 }
