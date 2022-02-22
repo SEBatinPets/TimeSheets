@@ -32,8 +32,8 @@ namespace TimeSheets.Controllers
 
             return Ok(result);
         }
-        [HttpGet("skip/{skip}/take/{take}")]
-        public async Task<IActionResult> GetByPagination([FromRoute] int skip, [FromRoute] int take)
+        [HttpGet]
+        public async Task<IActionResult> GetByPagination([FromQuery] int skip, [FromQuery] int take)
         {
             var cts = new CancellationTokenSource();
             var result = await personManager.GetByPaginationAsync(skip, take, cts.Token);
