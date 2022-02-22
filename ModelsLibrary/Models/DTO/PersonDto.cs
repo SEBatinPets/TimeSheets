@@ -18,6 +18,10 @@ namespace ModelsLibrary.Models.DTO
 
         public static implicit operator Person(PersonDto personDto)
         {
+            if (personDto == null)
+            {
+                return null;
+            }
             return new Person()
             {
                 Id = personDto.Id,
@@ -30,6 +34,10 @@ namespace ModelsLibrary.Models.DTO
         }
         public static implicit operator PersonDto(Person person)
         {
+            if(person == null)
+            {
+                return null;
+            }
             return new PersonDto()
             {
                 Id = person.Id,

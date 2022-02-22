@@ -17,56 +17,47 @@ namespace TimeSheets.Controllers
             this.personManager = personManager;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var result = await personManager.GetByIdAsync(id, cts.Token);
+            var result = await personManager.GetByIdAsync(id, token);
 
             return Ok(result);
         }
         [HttpGet("search/{name}")]
-        public async Task<IActionResult> GetByName([FromRoute] string name)
+        public async Task<IActionResult> GetByName([FromRoute] string name, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var result = await personManager.GetByNameAsync(name, cts.Token);
+            var result = await personManager.GetByNameAsync(name, token);
 
             return Ok(result);
         }
         [HttpGet]
-        public async Task<IActionResult> GetByPagination([FromQuery] int skip, [FromQuery] int take)
+        public async Task<IActionResult> GetByPagination(
+            [FromQuery] int skip, 
+            [FromQuery] int take, 
+            CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var result = await personManager.GetByPaginationAsync(skip, take, cts.Token);
+            var result = await personManager.GetByPaginationAsync(skip, take, token);
 
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PersonDto personDto)
+        public async Task<IActionResult> Create([FromBody] PersonDto personDto, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await personManager.CreateAsync(personDto, cts.Token);
+            await personManager.CreateAsync(personDto, token);
 
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] PersonDto personDto)
+        public async Task<IActionResult> Update([FromBody] PersonDto personDto, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var resultCode = await personManager.UpdateAsync(personDto, cts.Token);
+            var resultCode = await personManager.UpdateAsync(personDto, token);
 
-            if(resultCode == 0)
-            {
-                return Ok();
-            } else
-            {
-                return StatusCode(400);
-            }
+            return StatusCode(resultCode);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await personManager.DeleteByIdAsync(id, cts.Token);
+            await personManager.DeleteByIdAsync(id, token);
 
             return Ok();
         }

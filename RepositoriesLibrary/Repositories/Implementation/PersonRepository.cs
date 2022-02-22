@@ -11,10 +11,9 @@ namespace RepositoriesLibrary.Repositories.Implementation
 {
     public class PersonRepository : IPersonRepository
     {
-        public Task CreateAsync(Person item, CancellationToken token)
+        public async Task CreateAsync(Person item, CancellationToken token)
         {
-            data.Add(item);
-            return Task.CompletedTask;
+            await Task.Run(() => data.Add(item), token);
         }
 
         public async Task DeleteByIdAsync(int id, CancellationToken token)
@@ -26,17 +25,18 @@ namespace RepositoriesLibrary.Repositories.Implementation
             }
         }
 
-        public Task<Person> GetByIdAsync(int id, CancellationToken token)
+        public async Task<Person> GetByIdAsync(int id, CancellationToken token)
         {
-            return Task.FromResult( data.Where(p => p.Id == id).FirstOrDefault());
+            return await Task.Run(
+                () => 
+                data.Where(p => p.Id == id).FirstOrDefault(), 
+                token);
         }
 
         public Task<IEnumerable<Person>> GetByNameAsync(string name, CancellationToken token)
         {
-            return Task.FromResult(data.Where
-                (p => Contain(
-                    $"{p.FirstName} {p.LastName}".ToLower(), 
-                    name.ToLower())));
+            return Task.Run(() => data.Where
+            (p => Contain($"{p.FirstName} {p.LastName}", name)), token);
 
             static bool Contain(string baseString, string valueString)
             {
@@ -54,34 +54,28 @@ namespace RepositoriesLibrary.Repositories.Implementation
             }
         }
 
-        public Task<IEnumerable<Person>> GetPaginationAsync(int skip, int take, CancellationToken token)
+        public async Task<IEnumerable<Person>> GetPaginationAsync(int skip, int take, CancellationToken token)
         {
             IList<Person> persons = new List<Person>();
 
-            try
+            await Task.Run(() =>
             {
                 for (int i = 1; i <= take; i++)
                 {
-                    if(
-                        skip >= data.Count || 
-                        take >= data.Count ||
+                    if (
                         skip < 0 ||
                         take < 0 ||
                         skip + i >= data.Count)
                     {
                         break;
-                    } 
+                    }
                     persons.Add(data[skip + i]);
                 }
-            }
-            catch
-            {
-
-            }
+            }, token);
 
             IEnumerable<Person> result = persons;
 
-            return Task.FromResult(result);
+            return result;
         }
 
         /// <summary>
@@ -90,14 +84,14 @@ namespace RepositoriesLibrary.Repositories.Implementation
         /// <param name="item"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        /// <response code="0">Данные изменены</response>
-        /// <response code="1">Исходные данные не найдены</response>
+        /// <response code="200">Данные изменены</response>
+        /// <response code="400">Исходные данные не найдены</response>
         public async Task<int> UpdateAsync(Person item, CancellationToken token)
         {
             var person = await GetByIdAsync(item.Id, token);
             if(person == null)
             {
-                return 1;
+                return 400;
             }
             person.FirstName = item.FirstName;
             person.LastName = item.LastName;
@@ -105,7 +99,7 @@ namespace RepositoriesLibrary.Repositories.Implementation
             person.Company = item.Company;
             person.Age = item.Age;
 
-            return 0;
+            return 200;
         }
 
         private static List<Person> data = new List<Person>() {
