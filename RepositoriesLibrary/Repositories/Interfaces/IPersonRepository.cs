@@ -10,7 +10,7 @@ namespace RepositoriesLibrary.Repositories.Interfaces
 {
     public interface IPersonRepository: IRepository<Person>
     {
-        Task<Person> GetByNameAsync(string name, CancellationToken token);
+        Task<IEnumerable<Person>> GetByNameAsync(string name, CancellationToken token);
         Task<IEnumerable<Person>> GetPaginationAsync(int skip, int take, CancellationToken token);
     }
 }

@@ -27,10 +27,9 @@ namespace RepositoriesLibrary.Repositories.Implementation
             return Task.FromResult( data.Where(p => p.Id == id).FirstOrDefault());
         }
 
-        public Task<Person> GetByNameAsync(string name, CancellationToken token)
+        public Task<IEnumerable<Person>> GetByNameAsync(string name, CancellationToken token)
         {
-            return Task.FromResult(data.Where(p => Contain($"{p.FirstName} {p.LastName}", name))
-                .FirstOrDefault());
+            return Task.FromResult(data.Where(p => Contain($"{p.FirstName} {p.LastName}", name)));
 
             static bool Contain(string baseString, string valueString)
             {
