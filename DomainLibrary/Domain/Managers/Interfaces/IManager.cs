@@ -9,9 +9,9 @@ namespace DomainLibrary.Domain.Managers.Interfaces
 {
     public interface IManager<T> where T : class
     {
-        Task CreateAsync(T item, CancellationToken token);
+        Task<int> CreateAsync(T item, CancellationToken token);
         Task<T> GetByIdAsync(int id, CancellationToken token);
-        Task UpdateAsync(T item, CancellationToken token);
-        Task DeleteByIdAsync(int id, CancellationToken token);
+        Task<int> UpdateAsync(T item, CancellationToken token);
+        Task<int> DeleteByIdAsync(int id, CancellationToken token);
     }
 }

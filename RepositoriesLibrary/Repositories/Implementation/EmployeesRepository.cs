@@ -17,20 +17,30 @@ namespace RepositoriesLibrary.Repositories.Implementation
         {
             this.context = context;
         }
-        public async Task CreateAsync(Employee item, CancellationToken token)
+        public async Task<int> CreateAsync(Employee item, CancellationToken token)
         {
-            await context.Employees.AddAsync(item, token);
-            await context.SaveChangesAsync();
+            try
+            {
+                await context.Employees.AddAsync(item, token);
+                await context.SaveChangesAsync();
+                return 200;
+            }
+            catch
+            {
+                return 400;
+            }
         }
 
-        public async Task DeleteByIdAsync(int id, CancellationToken token)
+        public async Task<int> DeleteByIdAsync(int id, CancellationToken token)
         {
             var employee = await GetByIdAsync(id, token);
             if(employee != null)
             {
                 context.Employees.Remove(employee);
                 await context.SaveChangesAsync();
+                return 200;
             }
+            return 400;
         }
 
         public Task<Employee> GetByIdAsync(int id, CancellationToken token)
@@ -39,7 +49,7 @@ namespace RepositoriesLibrary.Repositories.Implementation
             return Task.FromResult(result);
         }
 
-        public async Task UpdateAsync(Employee item, CancellationToken token)
+        public async Task<int> UpdateAsync(Employee item, CancellationToken token)
         {
             //проверяем что такой объект существует
             var employee = await GetByIdAsync(item.Id, token);
@@ -47,7 +57,9 @@ namespace RepositoriesLibrary.Repositories.Implementation
             {
                 context.Employees.Update(item);
                 await context.SaveChangesAsync();
+                return 200;
             }
+            return 400;
         }
     }
 }

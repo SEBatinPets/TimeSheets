@@ -18,32 +18,28 @@ namespace TimeSheets.Controllers
             this.employeesManager = employeesManager;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var result = await employeesManager.GetByIdAsync(id, cts.Token);
+            var result = await employeesManager.GetByIdAsync(id, token);
             return Ok(JsonSerializer.Serialize(result));
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await employeesManager.DeleteByIdAsync(id, cts.Token);
-            return Ok();
+            var result = await employeesManager.DeleteByIdAsync(id, token);
+            return StatusCode(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] EmployeeDto employeeDto)
+        public async Task<IActionResult> Create([FromBody] EmployeeDto employeeDto, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await employeesManager.CreateAsync(employeeDto, cts.Token);
-            return Ok();
+            var result = await employeesManager.CreateAsync(employeeDto, token);
+            return StatusCode(result);
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] EmployeeDto employeeDto)
+        public async Task<IActionResult> Update([FromBody] EmployeeDto employeeDto, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await employeesManager.UpdateAsync(employeeDto, cts.Token);
-            return Ok();
+            var result = await employeesManager.UpdateAsync(employeeDto, token);
+            return StatusCode(result);
         }
     }
 }

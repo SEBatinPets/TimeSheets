@@ -18,32 +18,28 @@ namespace TimeSheets.Controllers
             this.userManager = userManager;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            var result = await userManager.GetByIdAsync(id, cts.Token);
+            var result = await userManager.GetByIdAsync(id, token);
             return Ok(JsonSerializer.Serialize(result));
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await userManager.DeleteByIdAsync(id, cts.Token);
-            return Ok();
+            var result = await userManager.DeleteByIdAsync(id, token);
+            return StatusCode(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserDto userDto)
+        public async Task<IActionResult> Create([FromBody] UserDto userDto, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await userManager.CreateAsync(userDto, cts.Token);
-            return Ok();
+            var result = await userManager.CreateAsync(userDto, token);
+            return StatusCode(result);
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UserDto userDto)
+        public async Task<IActionResult> Update([FromBody] UserDto userDto, CancellationToken token)
         {
-            var cts = new CancellationTokenSource();
-            await userManager.UpdateAsync(userDto, cts.Token);
-            return Ok();
+            var result = await userManager.UpdateAsync(userDto, token);
+            return StatusCode(result);
         }
     }
 }

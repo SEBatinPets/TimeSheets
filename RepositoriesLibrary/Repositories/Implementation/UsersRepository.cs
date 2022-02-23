@@ -17,20 +17,30 @@ namespace RepositoriesLibrary.Repositories.Implementation
         {
             this.context = context;
         }
-        public async Task CreateAsync(User item, CancellationToken token)
+        public async Task<int> CreateAsync(User item, CancellationToken token)
         {
-            await context.Users.AddAsync(item);
-            await context.SaveChangesAsync();
+            try
+            {
+                await context.Users.AddAsync(item, token);
+                await context.SaveChangesAsync();
+                return 200;
+            }
+            catch
+            {
+                return 400;
+            }
         }
 
-        public async Task DeleteByIdAsync(int id, CancellationToken token)
+        public async Task<int> DeleteByIdAsync(int id, CancellationToken token)
         {
             var user = await GetByIdAsync(id, token);
             if (user != null)
             {
                 context.Users.Remove(user);
                 await context.SaveChangesAsync();
+                return 200;
             }
+            return 400;
         }
 
         public Task<User> GetByIdAsync(int id, CancellationToken token)
@@ -39,14 +49,16 @@ namespace RepositoriesLibrary.Repositories.Implementation
             return Task.FromResult(result);
         }
 
-        public async Task UpdateAsync(User item, CancellationToken token)
+        public async Task<int> UpdateAsync(User item, CancellationToken token)
         {
             var employee = await GetByIdAsync(item.Id, token);
             if (employee != null)
             {
                 context.Users.Update(item);
                 await context.SaveChangesAsync();
+                return 200;
             }
+            return 400;
         }
     }
 }

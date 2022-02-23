@@ -17,14 +17,14 @@ namespace DomainLibrary.Domain.Managers.Implementation
         {
             this.userRepository = userRepository;
         }
-        public async Task CreateAsync(UserDto item, CancellationToken token)
+        public async Task<int> CreateAsync(UserDto item, CancellationToken token)
         {
-            await userRepository.CreateAsync(item, token);
+            return await userRepository.CreateAsync(item, token);
         }
 
-        public async Task DeleteByIdAsync(int id, CancellationToken token)
+        public async Task<int> DeleteByIdAsync(int id, CancellationToken token)
         {
-            await userRepository.DeleteByIdAsync(id, token);
+            return await userRepository.DeleteByIdAsync(id, token);
         }
 
         public async Task<UserDto> GetByIdAsync(int id, CancellationToken token)
@@ -32,9 +32,9 @@ namespace DomainLibrary.Domain.Managers.Implementation
             return await userRepository.GetByIdAsync(id, token);
         }
 
-        public async Task UpdateAsync(UserDto item, CancellationToken token)
+        public async Task<int> UpdateAsync(UserDto item, CancellationToken token)
         {
-            await userRepository.UpdateAsync(item, token);
+            return await userRepository.UpdateAsync(item, token);
         }
     }
 }
