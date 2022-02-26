@@ -31,6 +31,7 @@ namespace TimeSheets
             services.ConfigureDb(Configuration);
             services.ConfigureRepositories();
             services.ConfigureManagers();
+            services.ConfigureAuthentication();
             
             
         }
@@ -41,16 +42,16 @@ namespace TimeSheets
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
+                app.ConfigureSwagger();
             }
-            app.ConfigureSwagger();
 
-            app.UseRouting();
+            app.ConfigureAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }

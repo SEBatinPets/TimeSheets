@@ -1,4 +1,5 @@
 ﻿using DomainLibrary.Domain.Managers.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelsLibrary.Models.DTO;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace TimeSheets.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase

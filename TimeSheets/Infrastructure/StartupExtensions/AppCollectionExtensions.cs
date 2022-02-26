@@ -13,5 +13,12 @@ namespace TimeSheets.Infrastructure.StartupExtensions
                 c.RoutePrefix = string.Empty;
             });
         }
+        public static void ConfigureAuthentication(this IApplicationBuilder app)
+        {
+            
+            app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
+        }
     }
 }
