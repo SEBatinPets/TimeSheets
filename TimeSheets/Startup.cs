@@ -28,6 +28,12 @@ namespace TimeSheets
 
             services.AddControllers();
             services.ConfigureSwagger();
+            services.ConfigureDb(Configuration);
+            services.ConfigureRepositories();
+            services.ConfigureManagers();
+            services.ConfigureAuthentication();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,12 +45,13 @@ namespace TimeSheets
                 app.ConfigureSwagger();
             }
 
-            app.UseRouting();
+            app.ConfigureAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }
