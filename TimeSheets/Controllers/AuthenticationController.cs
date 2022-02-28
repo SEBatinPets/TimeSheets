@@ -17,7 +17,9 @@ namespace TimeSheets.Controllers
     {
         private readonly IAuthService userService;
         private readonly IAuthManager authManager;
-        public AuthenticationController(IAuthService userService, IAuthManager authManager)
+        public AuthenticationController(
+            IAuthService userService, 
+            IAuthManager authManager)
         {
             this.userService = userService;
             this.authManager = authManager;

@@ -94,5 +94,6 @@ namespace TimeSheets.Infrastructure.StartupExtensions
                 });
 
         }
+
     }
 }

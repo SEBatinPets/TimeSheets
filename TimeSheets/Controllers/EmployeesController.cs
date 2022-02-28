@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelsLibrary.Models.DTO;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,13 +21,13 @@ namespace TimeSheets.Controllers
             this.employeesManager = employeesManager;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id, CancellationToken token)
+        public async Task<IActionResult> Get([FromRoute][Range(1, int.MaxValue)] int id, CancellationToken token)
         {
             var result = await employeesManager.GetByIdAsync(id, token);
             return Ok(JsonSerializer.Serialize(result));
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken token)
+        public async Task<IActionResult> Delete([FromRoute, Range(1, int.MaxValue)] int id, CancellationToken token)
         {
             var result = await employeesManager.DeleteByIdAsync(id, token);
             return StatusCode(result);

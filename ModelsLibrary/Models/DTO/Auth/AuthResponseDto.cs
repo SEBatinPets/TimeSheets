@@ -1,6 +1,7 @@
 ﻿using ModelsLibrary.Models.Entities.Auth;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,14 @@ namespace ModelsLibrary.Models.DTO.Auth
 {
     public class AuthResponseDto
     {
+        
         public int Id { get; set; }
+        [Required]
+        [Range(1, int.MaxValue)]
         public int UserId { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
         public RefreshTokenDto LatestRefreshToken { get; set; }
 
