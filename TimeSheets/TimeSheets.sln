@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoriesLibrary", "..\R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainLibrary", "..\DomainLibrary\DomainLibrary.csproj", "{A312DDB0-8556-4F74-980F-CE851073D0D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLibrary", "..\ServiceLibrary\ServiceLibrary.csproj", "{AAC575E2-8979-49AD-B2E1-AE8E164EC5AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLibrary", "..\ServiceLibrary\ServiceLibrary.csproj", "{AAC575E2-8979-49AD-B2E1-AE8E164EC5AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetsTestsProject", "..\TimeSheetsTestsProject\TimeSheetsTestsProject.csproj", "{9977F191-8DCB-4F92-AC7B-0856B46F3E19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{AAC575E2-8979-49AD-B2E1-AE8E164EC5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAC575E2-8979-49AD-B2E1-AE8E164EC5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAC575E2-8979-49AD-B2E1-AE8E164EC5AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9977F191-8DCB-4F92-AC7B-0856B46F3E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9977F191-8DCB-4F92-AC7B-0856B46F3E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9977F191-8DCB-4F92-AC7B-0856B46F3E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9977F191-8DCB-4F92-AC7B-0856B46F3E19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
