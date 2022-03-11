@@ -1,5 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DomainLibrary.Domain.Managers.Implementation;
+using DomainLibrary.Domain.Managers.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using RepositoriesLibrary.Data.Ef.DbContexts;
+using RepositoriesLibrary.Repositories.Implementation;
+using RepositoriesLibrary.Repositories.Interfaces;
 
 namespace TimeSheets.Infrastructure.StartupExtensions
 {
@@ -15,6 +22,21 @@ namespace TimeSheets.Infrastructure.StartupExtensions
                     Version = "v1"
                 });
             });
+        }
+        public static void ConfigureManagers(this IServiceCollection services)
+        {
+            services.AddScoped<IEmployeesManager, EmployeesManager>();
+            services.AddScoped<IUsersManager, UsersManager>();
+        }
+        public static void ConfigureRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IEmployeesRepository, EmployeesRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+        }
+        public static void ConfigureDb(this IServiceCollection services, IConfiguration configuration)
+        {
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<TimeSheetsDbContext>(options => options.UseSqlite(connectionString));
         }
     }
 }
